@@ -1,4 +1,3 @@
-# STAGE 1: Build
 FROM node:20 AS build
 WORKDIR /app
 COPY package*.json ./
@@ -6,12 +5,11 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# STAGE 2: Serve
 FROM nginx:alpine
-# 1. Remove default Nginx config
+# 1. Clear the default Nginx landing page
 RUN rm /etc/nginx/conf.d/default.conf
 
-# 2. Add custom config for Angular routing
+# 2. Add a config that supports Angular routing
 RUN echo 'server { \
     listen 80; \
     location / { \
@@ -21,7 +19,7 @@ RUN echo 'server { \
     } \
 }' > /etc/nginx/conf.d/default.conf
 
-# 3. Copy build output (Ensure the folder name "food-delivery" matches your angular.json)
+# 3. Copy your specific build folder (check if it is "food-delivery")
 COPY --from=build /app/dist/food-delivery /usr/share/nginx/html
 
 EXPOSE 80
