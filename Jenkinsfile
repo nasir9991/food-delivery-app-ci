@@ -61,7 +61,7 @@ pipeline {
                 echo "Starting new container..."
                 docker run -d \
                   --name ${APP_NAME} \
-                  -p 80:80 \
+                  -p 8085:80 \
                   ${DOCKER_HUB}/${APP_NAME}:latest
                 '''
             }
