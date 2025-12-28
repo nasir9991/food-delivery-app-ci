@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PaymentService {
 
-  private BASE_URL = 'http://13.203.28.128:8081/api/payments/create-order';
+  private BASE_URL = 'http://65.1.12.253:8081/api/payments/create-order';
 
   constructor(private http: HttpClient) {}
 
